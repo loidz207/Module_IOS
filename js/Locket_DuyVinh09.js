@@ -2,12 +2,14 @@
 const mapping = {
   'Locket': ['Gold']
 };
-// =========   Phần cố định  ========= // 
-// =========  @duyvinh09 ========= // 
+// =========   Phần cố định  ========= *// 
+// =========  @lord207 ========= // 
 var ua = $request.headers["User-Agent"] || $request.headers["user-agent"],
   obj = JSON.parse($response.body);
+
 obj.Attention = "Chúc mừng bạn! Vui lòng không bán hoặc chia sẻ cho người khác!";
-var duyvinh09 = {
+
+var lord207 = {
       auto_resume_date: null,
       display_name: "locket_1600_1y",
       is_sandbox: true,
@@ -34,11 +36,16 @@ var duyvinh09 = {
       product_identifier: "locket_1600_1y",
       expires_date: "9999-01-09T10:10:14Z"
   };
+
 const match = Object.keys(mapping).find(e => ua.includes(e));
 if (match) {
   let [e, s] = mapping[match];
-  s ? (locketGold.product_identifier = s, obj.subscriber.subscriptions[s] = duyvinh09) : obj.subscriber.subscriptions["locket_1600_1y"] = duyvinh09, obj.subscriber.entitlements[e] = locketGold
-} else obj.subscriber.subscriptions["locket_1600_1y"] = duyvinh09, obj.subscriber.entitlements.pro = locketGold;
+  s ? (locketGold.product_identifier = s, obj.subscriber.subscriptions[s] = lord207) : obj.subscriber.subscriptions["locket_1600_1y"] = lord207, obj.subscriber.entitlements[e] = locketGold;
+} else {
+  obj.subscriber.subscriptions["locket_1600_1y"] = lord207;
+  obj.subscriber.entitlements.pro = locketGold;
+}
+
 $done({
   body: JSON.stringify(obj)
 });
